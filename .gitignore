@@ -1,0 +1,29 @@
+# macOS system files
+.DS_Store
+
+# IntelliJ IDEA project files
+.idea/
+*.iml
+
+# Maven build output
+target/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+
+# Ignore compiled class files
+*.class
+
+# Maven-specific
+.mvn/wrapper/maven-wrapper.jar
+
+# If you want to ignore your local pom.xml (not recommended), uncomment:
+# pom.xml
+
+# Ignore main source folder if it should not be committed (usually you DO want it)
+# src/main/
