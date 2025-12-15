@@ -1,4 +1,4 @@
-package challenges.pom.tests;
+package pom.tests;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;

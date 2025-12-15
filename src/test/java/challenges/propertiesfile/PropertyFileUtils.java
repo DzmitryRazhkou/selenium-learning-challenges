@@ -1,4 +1,4 @@
-package challenges.PropertiesFile;
+package challenges.propertiesfile;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public class PropertyFileUtils {
 
-    public static Properties loadProperties(String path) throws IOException {
+    public static Properties loadProperties(String path) {
         Properties properties = new Properties();
         FileInputStream file = null;
 
@@ -26,8 +26,8 @@ public class PropertyFileUtils {
 
 
     public static Properties loadApplicationProperties() throws IOException {
-        Properties properties = loadProperties("src/test/java/Selenium/PropertiesFile/application.properties");
-        return properties;
+        Properties prop = loadProperties("src/test/java/challenges/propertiesfile/application.properties");
+        return prop;
     }
 
 }

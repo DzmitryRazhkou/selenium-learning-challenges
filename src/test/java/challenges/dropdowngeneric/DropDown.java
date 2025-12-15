@@ -1,4 +1,4 @@
-package challenges.DropDownGeneric;
+package challenges.dropdowngeneric;
 
 public enum DropDown {
 
@@ -6,18 +6,20 @@ public enum DropDown {
         @Override
         public String toString() {
             return "Index";
-        }},
-
-        VALUE {
-            @Override
-            public String toString () {
-                return "value";
-            }},
-
-            VISIBLE_TEXT {
-                @Override
-                public String toString () {
-                    return "visibleText";
-                }
-            }
         }
+    },
+
+    VALUE {
+        @Override
+        public String toString() {
+            return "value";
+        }
+    },
+
+    VISIBLE_TEXT {
+        @Override
+        public String toString() {
+            return "visibleText";
+        }
+    }
+}

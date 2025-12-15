@@ -1,4 +1,4 @@
-package challenges.pom.locators;
+package pom.locators;
 
 import org.openqa.selenium.By;
 

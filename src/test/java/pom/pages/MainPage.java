@@ -1,4 +1,4 @@
-package challenges.pom.pages;
+package pom.pages;
 
 import pom.locators.Locators;
 import org.openqa.selenium.*;

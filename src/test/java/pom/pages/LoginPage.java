@@ -1,4 +1,4 @@
-package challenges.pom.pages;
+package pom.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;

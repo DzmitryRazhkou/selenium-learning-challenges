@@ -1,24 +1,24 @@
-package challenges.bootstrapdropdown;
+package challenges.draganddropconcept;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
-import java.util.*;
 
-public class BootStrapDropDown {
+public class DragAndDropConcept {
 
     @Test
     public void handleDropDown() throws InterruptedException {
 
-        String value = selectRandom();
-
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
+        Actions actions = new Actions(driver);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
 
@@ -27,21 +27,16 @@ public class BootStrapDropDown {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
         // Load Web Page URL:
-        driver.get("https://jqueryui.com/selectmenu/");
+        driver.get("https://jqueryui.com/droppable/");   // Enter URL
+        System.out.println("Page Has Loaded" + "\n_______________");
 
-        WebElement iframe = driver.findElement(By.cssSelector(".demo-frame"));
-        driver.switchTo().frame(iframe);
+        driver.switchTo().frame(0);
 
-        WebElement lastProgrammingLanguage = driver.findElement(By.cssSelector("#speed-button"));
-        lastProgrammingLanguage.click();
+        // Locators:
+        By draggableLocator = By.xpath("//*[@id='draggable']");
+        By droppableLocator = By.xpath("//*[@id='droppable']");
 
-        List<WebElement> arrayOfProgrammingLanguage = driver.findElements(By.cssSelector("#speed-menu>li"));
-        for (WebElement s: arrayOfProgrammingLanguage) {
-            if (s.getText().contains(value)) {
-                s.click();
-                break;
-            }
-        }
+        actions.clickAndHold(driver.findElement(draggableLocator)).moveToElement(driver.findElement(droppableLocator)).release().build().perform();
 
         Thread.sleep(2000);
 
@@ -49,10 +44,4 @@ public class BootStrapDropDown {
         driver.quit();
     }
 
-    public static String selectRandom() {
-        List<String> list = new ArrayList<>(List.of("Slower", "Slow", "Medium", "Fast", "Faster"));
-        Random random = new Random();
-        int index = random.nextInt(list.size());
-        return list.get(index);
-    }
 }

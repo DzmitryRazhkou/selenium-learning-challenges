@@ -2,34 +2,41 @@ package challenges.staleexception;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class StaleElementReferenceException extends Throwable {
+public class HandleStaleElementReferenceException {
 
-    protected WebDriverWait driver;
+    protected WebDriver driver;
     protected WebDriverWait wait;
 
     @Test
-    public void handleReCaptcha() {
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions opt = new ChromeOptions();
-        opt.addArguments("start-maximized");
-        opt.addArguments("disable-infobars");
-        opt.addArguments("--disable-extensions");
+    public void handleStaleElementReferenceException() throws InterruptedException {
 
-        WebDriver driver = new ChromeDriver(opt);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
         driver.get("https://the-internet.herokuapp.com/dynamic_controls");
 
+        By removeButtonLocator = By.cssSelector("button[onclick=\"swapCheckbox()\"]");
+        clickWithRetry(removeButtonLocator, 10);
 
+        Thread.sleep(5000);
+
+        String msgTxt = driver.findElement(By.cssSelector("#message")).getText().trim();
+        Assert.assertSame(msgTxt.trim(), "It's gone!");
+
+        Thread.sleep(2000);
 
         driver.quit();
     }

@@ -1,4 +1,4 @@
-package challenges.pom.helper;
+package pom.helper;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
