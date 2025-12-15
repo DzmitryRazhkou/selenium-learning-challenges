@@ -2,18 +2,21 @@ package challenges.handlemultitabwindows;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import java.time.Duration;
 import java.util.Set;
 
 public class HandleMultipleWindowsOrTabs {
-    public static void main(String[] args) throws InterruptedException {
-
+    @Test
+    public void handleMultipleWindowsOrTabs() throws InterruptedException {
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(2000));
@@ -24,6 +27,9 @@ public class HandleMultipleWindowsOrTabs {
 
         By youtubeLinkLocator = By.xpath("//a[@href='https://www.youtube.com/user/Charter97video']");
         wait.until(ExpectedConditions.elementToBeClickable(youtubeLinkLocator));
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(youtubeLinkLocator));
         driver.findElement(youtubeLinkLocator).click();
 
         Set<String> pages = driver.getWindowHandles();

@@ -1,4 +1,4 @@
-package challenges.pom.helper;
+package pom.helper;
 
 public enum BrowserType {
     FIREFOX, CHROME, EDGE

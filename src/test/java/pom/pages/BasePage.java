@@ -1,4 +1,4 @@
-package challenges.pom.pages;
+package pom.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;

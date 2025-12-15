@@ -1,4 +1,4 @@
-package challenges.pom.tests;
+package pom.tests;
 
 import pom.pages.LoginPage;
 import pom.pages.MainPage;

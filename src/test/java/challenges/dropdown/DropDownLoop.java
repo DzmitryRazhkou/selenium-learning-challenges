@@ -8,51 +8,57 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
-import java.util.*;
+import java.util.List;
 
-public class BootStrapDropDown {
+public class DropDownLoop {
+
+    public WebDriver driver;
 
     @Test
     public void handleDropDown() throws InterruptedException {
 
-        String value = selectRandom();
-
         WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
 
         // Dynamic Wait:
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().window().minimize();
+        driver.get("https://www.facebook.com/");
 
-        // Load Web Page URL:
-        driver.get("https://jqueryui.com/selectmenu/");
+        // Locators:
+        By createAccountButtonLocator = By.xpath("//*[@data-testid='open-registration-form-button']");
+        By monthLocator = By.xpath("//select[@id='month']//option");
+        By dayLocator = By.xpath("//select[@id='day']//option");
+        By yearLocator = By.xpath("//select[@id='year']//option");
 
-        WebElement iframe = driver.findElement(By.cssSelector(".demo-frame"));
-        driver.switchTo().frame(iframe);
+        // Actions:
+        WebElement createAccountButton = driver.findElement(createAccountButtonLocator);
+        createAccountButton.click();
 
-        WebElement lastProgrammingLanguage = driver.findElement(By.cssSelector("#speed-button"));
-        lastProgrammingLanguage.click();
+        selectDropDownValue(monthLocator, "May");
+        selectDropDownValue(dayLocator, "28");
+        selectDropDownValue(yearLocator, "1990");
 
-        List<WebElement> arrayOfProgrammingLanguage = driver.findElements(By.cssSelector("#speed-menu>li"));
-        for (WebElement s: arrayOfProgrammingLanguage) {
-            if (s.getText().contains(value)) {
-                s.click();
-                break;
-            }
-        }
-
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         driver.close();
         driver.quit();
     }
 
-    public static String selectRandom() {
-        List<String> list = new ArrayList<>(List.of("Slower", "Slow", "Medium", "Fast", "Faster"));
-        Random random = new Random();
-        int index = random.nextInt(list.size());
-        return list.get(index);
+    public void selectDropDownValue(By locator, String value) {
+        List<WebElement> monthList = driver.findElements(locator);
+        System.out.println("The Lis Of The Months Is: " + monthList.size());
+        System.out.println("\n__________");
+
+        for (WebElement webElement : monthList) {
+            System.out.println(webElement.getText());
+            if (webElement.getText().equalsIgnoreCase(value)) {
+                webElement.click();
+                break;
+            }
+        }
     }
 }
