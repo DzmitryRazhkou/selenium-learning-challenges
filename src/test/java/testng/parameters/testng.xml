@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Yahoo Suite">
+
+    <test name="Yahoo Login - Chrome">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="url" value="https://letcode.in/forms"/>
+        <parameter name="firstName" value="Joe"/>
+        <parameter name="lastName" value="Doe"/>
+        <parameter name="emailId" value="joedoe@yahoo.com"/>
+
+        <classes>
+            <class name="testng.parameters.TestNGParameters"/>
+        </classes>
+    </test>
+
+</suite>
